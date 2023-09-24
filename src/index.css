@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;900&family=Roboto+Slab:wght@300;400;700&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  transition: 0.5s;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.041);
+}
+
+.links {
+  text-decoration: none;
+}
+
+/* .flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+} */
