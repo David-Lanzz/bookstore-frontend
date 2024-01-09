@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const createUser = createAsyncThunk("create user", async (payload) => {
-  const url = "http://localhost:3000/auth/";
+  const url = "http://localhost:3000/auth/signup";
   try {
     const response = await axios.post(url, payload);
     const { data, headers } = response;
@@ -39,7 +39,7 @@ export const loginUser = createAsyncThunk("login user", async (payload) => {
 });
 const initialState = {
   data: {
-    signed_in: false,
+    signed_in: true,
     token: "",
     data: {},
   },

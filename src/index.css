@@ -27,18 +27,6 @@ body {
   text-decoration: none;
 }
 
-/* .flex {
-  display: flex;
+.items:hover {
+  transform: scale(1.02);
 }
-
-.items-center {
-  align-items: center;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.justify-center {
-  justify-content: center;
-} */

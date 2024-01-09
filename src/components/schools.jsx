@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { schoolsFromAPI } from "../redux/features/schools/schoolSlice"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { departmentsFromAPI } from "../redux/features/departments/departmentSlice"
 
 const Schools = () => {
   const dispatch = useDispatch()
@@ -13,17 +12,24 @@ const Schools = () => {
   }, [])
   const { schools } = useSelector(store => store.schools)
   const showDepartments = async (payload) => {
-    dispatch(departmentsFromAPI(payload))
-    navigate("/departments");
+    navigate(`/departments/${payload}`);
   }
 
   return (
-    <div className="grid grid-cols-2 gap-1 w-full ">
+    <div className="grid grid-cols-2 lg:grid-cols-5 gap-1 w-full ">
       {
         schools.map(school => {
           return (
-            <div key={school.id} onClick={() => { showDepartments({ school_id: school.id }) }} className="h-24 border border-white text-xl font-semibold flex justify-center items-center bg-blue-400 text-white rounded-lg">
-              {school.alias}
+            <div key={school.id} onClick={() => { showDepartments(school.id) }}
+              className= "relative h-40 border items cursor-pointer border-white text-xl font-semibold p-2 flex flex-col justify-between items-center bg-blue-950 text-white rounded-lg">
+              <h3 className="font-semibold text-xl text-center">{school.alias}</h3>
+              <div className="w-full h-3/5 flex justify-center">
+                <img src={school.logo} alt="" className="w-25 h-full bg-white rounded-[50%]" />
+              </div>
+              <h3 className="font-semibold text-sm text-center">{school.name.slice(0, 20) + "..."}</h3>
+              <div className="border border-white h-2/3 absolute left-2 top-6">
+
+              </div>
             </div>
           )
         })

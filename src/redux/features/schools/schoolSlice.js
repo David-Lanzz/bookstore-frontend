@@ -8,16 +8,15 @@ export const schoolsFromAPI = createAsyncThunk('get schools data', async () => {
     console.log(data)
     return data;
   } catch (error) {
-    return (error.message);
+    throw error
   }
 });
 export const postNewSchool = createAsyncThunk('post school data', async (payload) => {
   try {
     const postdata = await axios.post(url, payload);
-    schoolsFromAPI()
     return postdata.data;
   } catch (error) {
-    return error.message;
+    throw error.message;
   }
 });
 export const deleteFromAPI = createAsyncThunk('delete school', async (id) => {
@@ -25,35 +24,23 @@ export const deleteFromAPI = createAsyncThunk('delete school', async (id) => {
     const del = await axios.delete(`${url}/${id}`);
     return del.data;
   } catch (error) {
-    return error.message;
+    throw error.message;
   }
 });
 
 const initialState = {
   schools: [],
-  isLoading: false,
-  success: false,
-  error: undefined,
 };
 const schoolSlice = createSlice({
   name: 'schools',
   initialState,
   extraReducers(builder) {
     builder
-      .addCase(schoolsFromAPI.pending, (state) => ({ ...state, isLoading: true }))
       .addCase(schoolsFromAPI.fulfilled, (state, action) => {
         return {
-          ...state, isLoading: false, success: true, schools: action.payload
+          ...state, schools: action.payload
         };
       })
-      .addCase(schoolsFromAPI.rejected, (state) => ({ ...state, isLoading: false, error: false }))
-      .addCase(postNewSchool.pending, (state) => ({ ...state, isLoading: true }))
-      .addCase(postNewSchool.fulfilled, (state) => {
-        return {
-          ...state, isLoading: false, success: true
-        };
-      })
-      .addCase(postNewSchool.rejected, (state) => ({ ...state, isLoading: false, error: true }));
   },
 });
 

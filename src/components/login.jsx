@@ -17,7 +17,7 @@ const Login = () => {
     return (
         <section className='flex flex-col h-screen w-full items-center justify-center'>
             <h1 className='text-xl lg:text-3xl font-bold pb-8'>Welcome to Lanzz's Bookstore</h1>
-            <section className="inputs flex flex-col w-full items-center gap-4">
+            <section className="inputs flex flex-col w-full items-center gap-4 max-w-[40rem]">
                 <label className='w-5/6'>
                     <h3>Enter your Email:</h3>
                     <input className='w-full h-10 p-2 border border-blue-400 rounded' type="text" name="email" placeholder='email@example.com' defaultValue={inputs.email} onChange={handleInputChange} />

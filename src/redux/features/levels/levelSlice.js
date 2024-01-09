@@ -5,7 +5,7 @@ const url = 'http://localhost:3000/levels';
 export const levelsFromAPI = createAsyncThunk('get level data', async (payload) => {
     try {
         console.log(payload)
-        const { data } = await axios.get(`${url}/?department_id=${payload.department_id}`);
+        const { data } = await axios.get(`${url}/?department_id=${payload}`);
         return data;
     } catch (error) {
         return (error.message);
@@ -29,31 +29,18 @@ export const deleteFromAPI = createAsyncThunk('delete level data', async (id) =>
 });
 
 const initialState = {
-    levels: [],
-    department: {},
-    isLoading: false,
-    success: false,
-    error: undefined,
+    levels: []
 };
 const levelSlice = createSlice({
     name: 'levels',
     initialState,
     extraReducers(builder) {
         builder
-            .addCase(levelsFromAPI.pending, (state) => ({ ...state, isLoading: true }))
-            .addCase(levelsFromAPI.fulfilled, (state, action) => {
+            .addCase(levelsFromAPI.fulfilled, (state, {payload}) => {
                 return {
-                    ...state, isLoading: false, success: true, levels: action.payload.levels,department: action.payload.department
+                    ...state, levels: payload
                 };
             })
-            .addCase(levelsFromAPI.rejected, (state) => ({ ...state, isLoading: false, error: false }))
-            .addCase(postNewLevel.pending, (state) => ({ ...state, isLoading: true }))
-            .addCase(postNewLevel.fulfilled, (state) => {
-                return {
-                    ...state, isLoading: false, success: true
-                };
-            })
-            .addCase(postNewLevel.rejected, (state) => ({ ...state, isLoading: false, error: true }));
     },
 });
 
